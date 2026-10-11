@@ -1,0 +1,33 @@
+﻿* { box-sizing: border-box; }
+body { margin: 0; font-family: Arial, Helvetica, sans-serif; color: #263238; background: #f4f6f9; }
+.container { width: min(1100px, calc(100% - 32px)); margin: 0 auto; }
+.topbar { background: #243b53; color: #fff; padding: 18px 0; }
+.topbar .container { display: flex; align-items: center; gap: 18px; }
+.brand { color: #fff; font-weight: 700; text-decoration: none; letter-spacing: .5px; }
+.content { background: #fff; margin-top: 28px; padding: 28px; border-radius: 10px; box-shadow: 0 3px 14px rgba(20, 40, 60, .08); }
+h1 { margin: 0 0 8px; font-size: 28px; }
+.intro { color: #687782; margin: 0 0 24px; }
+.filter-form { display: flex; flex-wrap: wrap; align-items: end; gap: 12px; padding: 18px; background: #f7f9fb; border: 1px solid #e2e8ee; border-radius: 8px; }
+.field { display: flex; flex-direction: column; gap: 7px; }
+.field label { font-size: 13px; font-weight: 700; }
+input, select { min-height: 38px; padding: 8px 10px; border: 1px solid #cbd5df; border-radius: 5px; background: white; font-size: 14px; }
+.search-field input { width: 280px; }
+.button { min-height: 38px; padding: 0 17px; border: 0; border-radius: 5px; color: white; background: #1769aa; cursor: pointer; font-weight: 700; }
+.reset { color: #1769aa; padding: 10px 0; text-decoration: none; }
+.result-info { margin: 22px 0 12px; color: #52616b; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; padding: 13px 12px; border-bottom: 1px solid #e6ebef; }
+th { background: #eef3f7; color: #263b4a; white-space: nowrap; }
+th a { color: inherit; text-decoration: none; }
+th a:hover { color: #1769aa; }
+tbody tr:hover { background: #f8fbfd; }
+.product-name { font-weight: 700; }
+.price { text-align: right; white-space: nowrap; }
+.empty { padding: 28px; text-align: center; color: #687782; }
+.pagination-row { display: flex; justify-content: space-between; align-items: center; gap: 14px; margin-top: 22px; flex-wrap: wrap; }
+.pagination { display: flex; gap: 6px; flex-wrap: wrap; }
+.page-link { display: inline-block; padding: 8px 11px; border: 1px solid #d6dfe7; border-radius: 5px; color: #1769aa; text-decoration: none; background: #fff; }
+.page-link:hover, .page-link.current { color: #fff; background: #1769aa; border-color: #1769aa; }
+.footer { color: #73808a; padding: 22px 0; font-size: 13px; }
+@media (max-width: 650px) { .content { padding: 18px; } .search-field, .search-field input { width: 100%; } .topbar .container { align-items: flex-start; flex-direction: column; gap: 6px; } }

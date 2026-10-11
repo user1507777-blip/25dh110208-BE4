@@ -1,0 +1,93 @@
+﻿@model IEnumerable<25dh110208.Models.Product>
+@{
+    ViewBag.Title = "Danh sách Product";
+    string searchString = ViewBag.SearchString as string ?? "";
+    string sortOrder = ViewBag.SortOrder as string ?? "";
+    int page = (int)ViewBag.Page;
+    int pageSize = (int)ViewBag.PageSize;
+    int totalItems = (int)ViewBag.TotalItems;
+    int totalPages = (int)ViewBag.TotalPages;
+}
+
+<h1>Danh sách Product</h1>
+<p class="intro">Tìm kiếm, sắp xếp và phân trang kết quả sản phẩm.</p>
+
+@using (Html.BeginForm("Index", "Product", FormMethod.Get, new { @class = "filter-form" }))
+{
+    <div class="field search-field">
+        <label for="searchString">Từ khóa</label>
+        <input type="text" id="searchString" name="searchString" value="@searchString" placeholder="Nhập tên sản phẩm..." />
+    </div>
+    <div class="field">
+        <label for="pageSize">Số sản phẩm/trang</label>
+        <select id="pageSize" name="pageSize">
+            <option value="5" @(pageSize == 5 ? "selected" : "")>5</option>
+            <option value="10" @(pageSize == 10 ? "selected" : "")>10</option>
+            <option value="20" @(pageSize == 20 ? "selected" : "")>20</option>
+        </select>
+    </div>
+    <input type="hidden" name="sortOrder" value="@sortOrder" />
+    <button type="submit" class="button">Tìm kiếm</button>
+    <a class="reset" href="@Url.Action("Index", "Product")">Xóa lọc</a>
+}
+
+<div class="result-info">Tìm thấy <strong>@totalItems</strong> sản phẩm</div>
+
+<div class="table-wrap">
+<table>
+    <thead>
+        <tr>
+            <th>Mã</th>
+            <th>@Html.ActionLink("Tên sản phẩm", "Index", new { searchString = searchString, sortOrder = ViewBag.NameSortParm, pageSize = pageSize })</th>
+            <th>Mô tả</th>
+            <th class="price">@Html.ActionLink("Đơn giá", "Index", new { searchString = searchString, sortOrder = ViewBag.PriceSortParm, pageSize = pageSize })</th>
+        </tr>
+    </thead>
+    <tbody>
+    @if (Model != null && Model.Any())
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ProductID</td>
+                <td class="product-name">@item.ProductName</td>
+                <td>@item.ProductDescription</td>
+                <td class="price">@item.UnitPrice.ToString("N0") đ</td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr><td colspan="4" class="empty">Không tìm thấy sản phẩm phù hợp.</td></tr>
+    }
+    </tbody>
+</table>
+</div>
+
+@if (totalPages > 0)
+{
+    <div class="pagination-row">
+        <span>Trang @page / @totalPages</span>
+        <nav class="pagination">
+            @if (page > 1)
+            {
+                @Html.ActionLink("‹ Trước", "Index", new { searchString = searchString, sortOrder = sortOrder, page = page - 1, pageSize = pageSize }, new { @class = "page-link" })
+            }
+            @for (int i = 1; i <= totalPages; i++)
+            {
+                if (i == page)
+                {
+                    <span class="page-link current">@i</span>
+                }
+                else
+                {
+                    @Html.ActionLink(i.ToString(), "Index", new { searchString = searchString, sortOrder = sortOrder, page = i, pageSize = pageSize }, new { @class = "page-link" })
+                }
+            }
+            @if (page < totalPages)
+            {
+                @Html.ActionLink("Sau ›", "Index", new { searchString = searchString, sortOrder = sortOrder, page = page + 1, pageSize = pageSize }, new { @class = "page-link" })
+            }
+        </nav>
+    </div>
+}

@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewBag.Title - Product Admin</title>
+    <link href="@Url.Content("~/Content/site.css")" rel="stylesheet" />
+</head>
+<body>
+    <header class="topbar">
+        <div class="container">
+            <a class="brand" href="@Url.Action("Index", "Product")">PRODUCT ADMIN</a>
+            <span>Quản lý sản phẩm</span>
+        </div>
+    </header>
+    <main class="container content">
+        @RenderBody()
+    </main>
+    <footer class="container footer">Bài thực hành ASP.NET MVC 5</footer>
+</body>
+</html>
